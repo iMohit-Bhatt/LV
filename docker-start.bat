@@ -88,6 +88,11 @@ if not exist "resources\views\auth" (
     docker-compose exec app php artisan breeze:install blade
 )
 
+:: Install and build frontend assets
+echo %YELLOW%Installing and building frontend assets...%NC%
+docker-compose exec app npm install
+docker-compose exec app npm run build
+
 :: Run migrations
 echo %YELLOW%Running database migrations...%NC%
 docker-compose exec app php artisan migrate
