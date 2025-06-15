@@ -6,6 +6,16 @@ GREEN='\033[0;32m'
 YELLOW='\033[1;33m'
 NC='\033[0m' # No Color
 
+# Parse command line arguments
+NO_CACHE=false
+while [[ "$#" -gt 0 ]]; do
+    case $1 in
+        --no-cache) NO_CACHE=true ;;
+        *) echo "Unknown parameter: $1"; exit 1 ;;
+    esac
+    shift
+done
+
 # Function to check if a command exists
 command_exists() {
     command -v "$1" >/dev/null 2>&1
@@ -59,7 +69,13 @@ fi
 
 # Build and start the containers
 echo -e "${YELLOW}Building and starting containers...${NC}"
-docker-compose up -d --build
+if [ "$NO_CACHE" = true ]; then
+    echo -e "${YELLOW}Building without cache...${NC}"
+    docker-compose build --no-cache
+    docker-compose up -d
+else
+    docker-compose up -d --build
+fi
 
 # Wait for MySQL to be ready
 echo -e "${YELLOW}Waiting for MySQL to be ready...${NC}"
