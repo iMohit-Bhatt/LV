@@ -24,13 +24,20 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Set working directory
 WORKDIR /var/www
 
-# Copy existing application directory
-COPY . /var/www
+# Copy composer files first
+COPY composer.json composer.lock ./
 
-# Set proper permissions
-RUN chown -R www-data:www-data /var/www \
-    && chmod -R 755 /var/www/storage \
-    && chmod -R 755 /var/www/bootstrap/cache
+# Install dependencies
+RUN composer install --no-scripts --no-autoloader
+
+# Copy the rest of the application
+COPY . .
+
+# Generate autoload files
+RUN composer dump-autoload
+
+# Set proper permissions (using chmod instead of chown for Windows compatibility)
+RUN chmod -R 775 storage bootstrap/cache
 
 # Change current user to www-data
 USER www-data

@@ -65,10 +65,9 @@ docker-compose up -d --build
 echo -e "${YELLOW}Waiting for MySQL to be ready...${NC}"
 sleep 10
 
-# Set proper permissions
+# Set proper permissions (using chmod for Windows compatibility)
 echo -e "${YELLOW}Setting proper permissions...${NC}"
 docker-compose exec app chmod -R 775 storage bootstrap/cache
-docker-compose exec app chown -R www-data:www-data storage bootstrap/cache
 
 # Install Breeze if not already installed
 if [ ! -d "resources/views/auth" ]; then
