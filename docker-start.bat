@@ -73,6 +73,10 @@ if "%NO_CACHE%"=="true" (
 echo %YELLOW%Waiting for MySQL to be ready...%NC%
 timeout /t 10 /nobreak >nul
 
+:: Install composer dependencies
+echo %YELLOW%Installing composer dependencies...%NC%
+docker-compose exec app composer install
+
 :: Set proper permissions (using chmod for Windows compatibility)
 echo %YELLOW%Setting proper permissions...%NC%
 docker-compose exec app chmod -R 775 storage bootstrap/cache
@@ -94,6 +98,13 @@ if %ERRORLEVEL% neq 0 (
     echo %YELLOW%Generating application key...%NC%
     docker-compose exec app php artisan key:generate
 )
+
+:: Clear Laravel caches
+echo %YELLOW%Clearing Laravel caches...%NC%
+docker-compose exec app php artisan config:clear
+docker-compose exec app php artisan cache:clear
+docker-compose exec app php artisan view:clear
+docker-compose exec app php artisan route:clear
 
 echo %GREEN%Laravel application is now running at http://localhost:8000%NC%
 echo %GREEN%You can access:%NC%

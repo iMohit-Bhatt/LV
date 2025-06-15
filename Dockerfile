@@ -36,8 +36,11 @@ COPY . .
 # Generate autoload files
 RUN composer dump-autoload
 
-# Set proper permissions (using chmod instead of chown for Windows compatibility)
-RUN chmod -R 775 storage bootstrap/cache
+# Create storage and cache directories with proper permissions
+RUN mkdir -p storage/framework/{sessions,views,cache} \
+    && mkdir -p storage/logs \
+    && mkdir -p bootstrap/cache \
+    && chmod -R 775 storage bootstrap/cache
 
 # Change current user to www-data
 USER www-data
