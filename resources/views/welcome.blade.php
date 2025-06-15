@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Hello Laravel</title>
         <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
-        <style>
+            <style>
             body {
                 font-family: 'Nunito', sans-serif;
                 display: flex;
@@ -27,7 +27,7 @@
                 font-size: 2.5rem;
                 margin-bottom: 1rem;
             }
-        </style>
+            </style>
     </head>
     <body>
         <div class="container">
