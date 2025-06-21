@@ -1,5 +1,6 @@
 *.log
-.DS_Store
+docker/mysql
+/.composer
 .env.backup
 .env.production
 .phpactor.json
@@ -25,3 +26,4 @@ Thumbs.db
 yarn-error.log
 .npm
 .env
+
