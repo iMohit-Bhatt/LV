@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Public;
 
 use App\Http\Controllers\Controller;
+use App\Models\Blog;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
@@ -12,7 +13,11 @@ class BlogController extends Controller
      */
     public function index()
     {
-        return view('public.blog');
+        $blogs = Blog::published()
+                    ->orderBy('published_at', 'desc')
+                    ->paginate(6);
+        
+        return view('public.blog', compact('blogs'));
     }
 
     /**
@@ -34,9 +39,16 @@ class BlogController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        //
+        $blog = Blog::where('slug', $slug)
+                   ->where('status', 'published')
+                   ->firstOrFail();
+        
+        // Increment view count
+        $blog->incrementViews();
+        
+        return view('public.blog-single', compact('blog'));
     }
 
     /**

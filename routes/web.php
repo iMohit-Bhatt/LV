@@ -11,7 +11,7 @@ use App\Http\Controllers\Admin\PropertyController as AdminPropertyController;
 
 Route::get('/', function () {
     return view('public.index');
-});
+})->name('public.index');
 
 Route::get('/about', function () {
     return view('public.about');
