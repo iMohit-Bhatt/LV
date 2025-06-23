@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Public\ContactController as PublicContactController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\PropertyController as AdminPropertyController;
+use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
     return view('public.index');
@@ -82,6 +83,9 @@ Route::name('public.')->group(function () {
     Route::resource('contact', PublicContactController::class);
 });
 
+// Contact form submission
+Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact.submit');
+
 Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () {
     // Blog
     Route::resource('blog', AdminBlogController::class);
@@ -91,6 +95,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
     // Property
     Route::resource('property', AdminPropertyController::class);
+
+    // Contact Submissions
+    Route::get('contact-submissions', [\App\Http\Controllers\Admin\ContactSubmissionController::class, 'index'])->name('contact-submissions.index');
 });
 
 

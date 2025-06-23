@@ -13,9 +13,14 @@
             <div class="col-12">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h1>Blog Management</h1>
-                    <a href="{{ route('admin.blog.create') }}" class="btn btn-primary">
-                        <i class="fas fa-plus"></i> Create New Post
-                    </a>
+                    <div>
+                        <a href="{{ route('dashboard') }}" class="btn btn-secondary me-2">
+                            <i class="fas fa-tachometer-alt"></i> Dashboard
+                        </a>
+                        <a href="{{ route('admin.blog.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i> Create New Post
+                        </a>
+                    </div>
                 </div>
 
                 @if(session('success'))
