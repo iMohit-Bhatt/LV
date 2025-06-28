@@ -61,6 +61,20 @@ if not exist "docker\nginx\app.conf" (
 
 :: Build and start the containers
 echo %YELLOW%Building and starting containers...%NC%
+
+:: Clean up any existing containers and images
+echo %YELLOW%Cleaning up existing containers...%NC%
+docker-compose down -v
+docker system prune -f
+
+:: Create storage directories before building
+echo %YELLOW%Creating storage directories...%NC%
+if not exist storage\framework\cache mkdir storage\framework\cache
+if not exist storage\framework\sessions mkdir storage\framework\sessions
+if not exist storage\framework\views mkdir storage\framework\views
+if not exist storage\logs mkdir storage\logs
+if not exist bootstrap\cache mkdir bootstrap\cache
+
 if "%NO_CACHE%"=="true" (
     echo %YELLOW%Building without cache...%NC%
     docker-compose build --no-cache
@@ -77,9 +91,10 @@ timeout /t 10 /nobreak >nul
 echo %YELLOW%Installing composer dependencies...%NC%
 docker-compose exec app composer install
 
-:: Set proper permissions (using chmod for Windows compatibility)
+:: Set proper permissions (Windows compatible)
 echo %YELLOW%Setting proper permissions...%NC%
-docker-compose exec app chmod -R 775 storage bootstrap/cache
+docker-compose exec app sh -c "mkdir -p storage/framework/cache storage/framework/sessions storage/framework/views storage/logs"
+docker-compose exec app sh -c "touch storage/logs/laravel.log"
 
 :: Install Breeze if not already installed
 if not exist "resources\views\auth" (
