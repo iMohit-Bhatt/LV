@@ -8,7 +8,7 @@
 
                     <nav aria-label="breadcrumb" data-aos="fade-up" data-aos-delay="200">
                         <ol class="breadcrumb text-center justify-content-center">
-                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{ url('/') }}">Home</a></li>
                             <li class="breadcrumb-item active text-white-50" aria-current="page">
                                 Company Director
                             </li>
@@ -21,53 +21,37 @@
     <!-- About Us -->
     <div class="section">
         <div class="container">
+            @forelse($directors as $index => $director)
             <div class="row text-left mb-5">
+                @if($index % 2 == 0)
                 <div class="col-lg-6">
-                    <h2 class="font-weight-bold heading text-primary mb-4 mt-5">Maneesh</h2>
-                    <p class="text-black-50">
-                        At EkanshRealty, our mission is to guide customers toward making the RIGHT property investments with
-                        complete transparency and zero hassle. We collaborate exclusively with a select group of top-tier
-                        real estate developers known for their exceptional quality and timely project delivery.
-                    </p>
-                    <p class="text-black-50">
-                        Every property we recommend meets rigorous standards for legal compliance, offer integrity, and
-                        developer reliability. In fact, we endorse only the properties where we’d confidently invest our own
-                        money.
-                    </p>
-                    <p class="text-black-50">
-                        Over the years, EkanshRealty has become synonymous with trust, professionalism, and excellence in
-                        real estate consultation. Our unwavering commitment to high ethical standards and integrity has
-                        earned us prestigious awards and established EkanshRealty as a trusted name in the industry.
-                    </p>
+                    <h2 class="font-weight-bold heading text-primary mb-4 mt-5">{{ $director->name }}</h2>
+                    <div class="text-black-50">
+                        {!! nl2br(e($director->description)) !!}
+                    </div>
                 </div>
                 <div class="col-lg-6" align="right">
-                    <img src="{{ asset('scss/images/Director-Manees.png" alt="Image" class="img-fluid" />
+                    <img src="{{ asset('storage/' . $director->image) }}" alt="{{ $director->name }}" class="img-fluid" />
                 </div>
-            </div>
-            <div class="row text-left mb-5">
+                @else
                 <div class="col-lg-6" align="left">
-                    <img src="{{ asset('scss/images/Director-RK-Gautam.png" alt="Image" class="img-fluid" />
+                    <img src="{{ asset('storage/' . $director->image) }}" alt="{{ $director->name }}" class="img-fluid" />
                 </div>
                 <div class="col-lg-6">
-                    <h2 class="font-weight-bold heading text-primary mb-4 mt-5">R.K Gautam</h2>
-                    <p class="text-black-50">
-                        At EkanshRealty, our mission is to guide customers toward making the RIGHT property investments with
-                        complete transparency and zero hassle. We collaborate exclusively with a select group of top-tier
-                        real estate developers known for their exceptional quality and timely project delivery.
-                    </p>
-                    <p class="text-black-50">
-                        Every property we recommend meets rigorous standards for legal compliance, offer integrity, and
-                        developer reliability. In fact, we endorse only the properties where we’d confidently invest our own
-                        money.
-                    </p>
-                    <p class="text-black-50">
-                        Over the years, EkanshRealty has become synonymous with trust, professionalism, and excellence in
-                        real estate consultation. Our unwavering commitment to high ethical standards and integrity has
-                        earned us prestigious awards and established EkanshRealty as a trusted name in the industry.
-                    </p>
+                    <h2 class="font-weight-bold heading text-primary mb-4 mt-5">{{ $director->name }}</h2>
+                    <div class="text-black-50">
+                        {!! nl2br(e($director->description)) !!}
+                    </div>
+                </div>
+                @endif
+            </div>
+            @empty
+            <div class="row text-left mb-5">
+                <div class="col-lg-12 text-center">
+                    <p>No company directors available at the moment.</p>
                 </div>
             </div>
-
+            @endforelse
         </div>
     </div>
 

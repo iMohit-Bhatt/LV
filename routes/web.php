@@ -8,6 +8,11 @@ use App\Http\Controllers\Admin\BlogController as AdminBlogController;
 use App\Http\Controllers\Public\ContactController as PublicContactController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\PropertyController as AdminPropertyController;
+use App\Http\Controllers\Public\PropertyController as PublicPropertyController;
+use App\Http\Controllers\Admin\TeamMemberController as AdminTeamMemberController;
+use App\Http\Controllers\Public\TeamController as PublicTeamController;
+use App\Http\Controllers\Admin\CompanyDirectorController as AdminCompanyDirectorController;
+use App\Http\Controllers\Public\CompanyDirectorController as PublicCompanyDirectorController;
 use App\Http\Controllers\ContactController;
 
 Route::get('/', function () {
@@ -18,25 +23,17 @@ Route::get('/about', function () {
     return view('public.about');
 });
 
-Route::get('/about/company-director', function () {
-    return view('public.company-director');
-});
+// Company Director route
+Route::get('/about/company-director', [PublicCompanyDirectorController::class, 'index'])->name('public.company-director');
 
-Route::get('/about/our-team', function () {
-    return view('public.our-team');
-});
+// Team route
+Route::get('/about/our-team', [PublicTeamController::class, 'index'])->name('public.our-team');
 
-Route::get('/properties', function () {
-    return view('public.properties');
-});
-
-Route::get('/properties/commercial-property', function () {
-    return view('public.commercial');
-});
-
-Route::get('/properties/plots-villa', function () {
-    return view('public.plots-villa');
-});
+// Property routes
+Route::get('/properties', [PublicPropertyController::class, 'index'])->name('public.properties');
+Route::get('/properties/residential-property', [PublicPropertyController::class, 'residential'])->name('public.residential-property');
+Route::get('/properties/commercial-property', [PublicPropertyController::class, 'commercial'])->name('public.commercial-property');
+Route::get('/properties/plots-villa', [PublicPropertyController::class, 'plotsVilla'])->name('public.plots-villa');
 
 Route::get('/services', function () {
     return view('public.services');
@@ -95,6 +92,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
     // Property
     Route::resource('property', AdminPropertyController::class);
+
+    // Team Member
+    Route::resource('team-member', AdminTeamMemberController::class);
+
+    // Company Director
+    Route::resource('company-director', AdminCompanyDirectorController::class);
 
     // Contact Submissions
     Route::get('contact-submissions', [\App\Http\Controllers\Admin\ContactSubmissionController::class, 'index'])->name('contact-submissions.index');

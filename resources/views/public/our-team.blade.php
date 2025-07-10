@@ -32,128 +32,49 @@
             </div>
             <div class="testimonial-slider-wrap">
                 <div class="testimonial-slider">
+                    @forelse($teamMembers as $member)
                     <div class="item">
                         <div class="testimonial">
-                            <img src="{{ asset('scss/images/person_1-min.jpg') }}" alt="Image"
+                            <img src="{{ asset('storage/' . $member->image) }}" alt="{{ $member->name }}"
                                 class="img-fluid rounded-circle w-25 mb-4" />
-                            <h3 class="h5 text-primary">James Smith</h3>
-                            <p class="text-black-50">Designer, Co-founder</p>
+                            <h3 class="h5 text-primary">{{ $member->name }}</h3>
+                            <p class="text-black-50">{{ $member->position }}</p>
 
                             <p>
-                                Far far away, behind the word mountains, far from the
-                                countries Vokalia and Consonantia, there live the blind texts.
-                                Separated they live in Bookmarksgrove right at the coast of
-                                the Semantics, a large language ocean.
+                                {{ $member->description }}
                             </p>
 
                             <ul class="social list-unstyled list-inline dark-hover">
+                                @if($member->twitter_url)
                                 <li class="list-inline-item">
-                                    <a href="#"><span class="icon-twitter"></span></a>
+                                    <a href="{{ $member->twitter_url }}" target="_blank"><span class="icon-twitter"></span></a>
                                 </li>
+                                @endif
+                                @if($member->facebook_url)
                                 <li class="list-inline-item">
-                                    <a href="#"><span class="icon-facebook"></span></a>
+                                    <a href="{{ $member->facebook_url }}" target="_blank"><span class="icon-facebook"></span></a>
                                 </li>
+                                @endif
+                                @if($member->linkedin_url)
                                 <li class="list-inline-item">
-                                    <a href="#"><span class="icon-linkedin"></span></a>
+                                    <a href="{{ $member->linkedin_url }}" target="_blank"><span class="icon-linkedin"></span></a>
                                 </li>
+                                @endif
+                                @if($member->instagram_url)
                                 <li class="list-inline-item">
-                                    <a href="#"><span class="icon-instagram"></span></a>
+                                    <a href="{{ $member->instagram_url }}" target="_blank"><span class="icon-instagram"></span></a>
                                 </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
-
+                    @empty
                     <div class="item">
-                        <div class="testimonial">
-                            <img src="{{ asset('scss/images/person_2-min.jpg') }}" alt="Image"
-                                class="img-fluid rounded-circle w-25 mb-4" />
-                            <h3 class="h5 text-primary">Carol Houston</h3>
-                            <p class="text-black-50">Designer, Co-founder</p>
-
-                            <p>
-                                Far far away, behind the word mountains, far from the
-                                countries Vokalia and Consonantia, there live the blind texts.
-                                Separated they live in Bookmarksgrove right at the coast of
-                                the Semantics, a large language ocean.
-                            </p>
-
-                            <ul class="social list-unstyled list-inline dark-hover">
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-twitter"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-facebook"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-linkedin"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-instagram"></span></a>
-                                </li>
-                            </ul>
+                        <div class="testimonial text-center">
+                            <p>No team members available at the moment.</p>
                         </div>
                     </div>
-
-                    <div class="item">
-                        <div class="testimonial">
-                            <img src="{{ asset('scss/images/person_3-min.jpg') }}" alt="Image"
-                                class="img-fluid rounded-circle w-25 mb-4" />
-                            <h3 class="h5 text-primary">Synthia Cameron</h3>
-                            <p class="text-black-50">Designer, Co-founder</p>
-
-                            <p>
-                                Far far away, behind the word mountains, far from the
-                                countries Vokalia and Consonantia, there live the blind texts.
-                                Separated they live in Bookmarksgrove right at the coast of
-                                the Semantics, a large language ocean.
-                            </p>
-
-                            <ul class="social list-unstyled list-inline dark-hover">
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-twitter"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-facebook"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-linkedin"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-instagram"></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="testimonial">
-                            <img src="{{ asset('scss/images/person_2.jpg') }}" alt="Image" class="img-fluid rounded-circle w-25 mb-4" />
-                            <h3 class="h5 text-primary">Davin Smith</h3>
-                            <p class="text-black-50">Designer, Co-founder</p>
-
-                            <p>
-                                Far far away, behind the word mountains, far from the
-                                countries Vokalia and Consonantia, there live the blind texts.
-                                Separated they live in Bookmarksgrove right at the coast of
-                                the Semantics, a large language ocean.
-                            </p>
-
-                            <ul class="social list-unstyled list-inline dark-hover">
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-twitter"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-facebook"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-linkedin"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-instagram"></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>

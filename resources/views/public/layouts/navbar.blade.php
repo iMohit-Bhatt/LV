@@ -17,7 +17,7 @@
             <a href="{{ url('/about')}}">About</a>
             <ul class='dropdown'>
               <li><a href="{{ url('/about')}}">About</a></li>
-              <li><a href="{{ url('/abou/company-director')}}">Company Director</a></li>
+              <li><a href="{{ url('/about/company-director')}}">Company Director</a></li>
              <li><a href="{{ url('/about/our-team')}}">Our team</a></li>
             </ul>
           </li>
