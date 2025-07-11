@@ -25,7 +25,7 @@
             <a href="{{ url('/properties/residential-property') }}">Properties</a>
             <ul class='dropdown'>
               <li><a href="{{ url('/properties/residential-property') }}">Residential Property</a></li>
-              <li><a href="{{ url('/properties/commercial') }}">Commercial</a></li>
+              <li><a href="{{ url('/properties/commercial-property') }}">Commercial</a></li>
               <li><a href="{{ url('/properties/plots-villa') }}">Plots & Villa</a></li>
             </ul>
           </li>
@@ -44,7 +44,7 @@
             <a>Recent Property</a>
             <ul class='dropdown'>
               <li><a href="{{ url('/properties/residential-property')}}">Residetial</a></li>
-              <li><a href="{{ url('/properties/commercial')}}">Commercial</a></li>
+              <li><a href="{{ url('/properties/commercial-property')}}">Commercial</a></li>
             </ul>
           </li>
           <li><a href="{{ url('/blog')}}">Blog</a></li>
