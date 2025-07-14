@@ -1,27 +1,23 @@
 @extends('public.layouts.master')
+
 @section('content')
-    <div class="hero page-inner overlay" style="background-image: url('{{ asset('scss/images/hero_bg_3.jpg') }}')">
+    <div class="hero inner-page" style="background-image: url('{{ asset('scss/images/hero_bg_1.jpg') }}');">
         <div class="container">
-            <div class="row justify-content-center align-items-center">
-                <div class="col-lg-9 text-center mt-5">
-                    <h1 class="heading" data-aos="fade-up">Commercial Properties</h1>
+            <div class="row align-items-end">
+                <div class="col-lg-5">
+                    <div class="intro">
+                        <h1><strong>Commercial Property</strong></h1>
+                        <div class="intro-bullets">
+                            <span class="d-block">Discover premium commercial properties for your business.</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    <!-- OUR RECENT PROPERTIES -->
-    <div class="section">
+
+    <div class="site-section">
         <div class="container">
-            <div class="row mb-5 align-items-center">
-                <div class="col-lg-6">
-                    <h2 class="font-weight-bold text-primary heading">Office Properties</h2>
-                </div>
-                <div class="col-lg-6 text-lg-end">
-                    <p>
-                        <a href="{{ route('public.properties') }}" target="_blank" class="btn btn-primary py-3 px-4">View all properties</a>
-                    </p>
-                </div>
-            </div>
             <div class="row">
                 @forelse($properties as $property)
                 <div class="col-md-6 col-lg-4 mb-4">
@@ -67,4 +63,7 @@
             </div>
         </div>
     </div>
+
+    <!-- Include Property Modals -->
+    @include('public.property-modals')
 @endsection

@@ -143,6 +143,65 @@
             </div>
         </div>
 
+        <!-- Second Row of Management Cards -->
+        <div class="row">
+            <div class="col-lg-3 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <p class="text-muted mb-1">Testimonial Management</p>
+                                        <h4 class="mb-0">Manage Testimonials</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 align-self-center text-end">
+                                <i class="fas fa-star fa-2x text-warning"></i>
+                            </div>
+                        </div>
+                        <hr class="hr-dashed">
+                        <div class="row">
+                            <div class="col">
+                                <a href="{{ route('admin.testimonial.index') }}" class="btn btn-warning btn-sm w-100">
+                                    <i class="fas fa-cog"></i> Manage Testimonials
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-3 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <p class="text-muted mb-1">Footer Settings</p>
+                                        <h4 class="mb-0">Manage Footer</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 align-self-center text-end">
+                                <i class="fas fa-cog fa-2x text-secondary"></i>
+                            </div>
+                        </div>
+                        <hr class="hr-dashed">
+                        <div class="row">
+                            <div class="col">
+                                <a href="{{ route('admin.footer.index') }}" class="btn btn-secondary btn-sm w-100">
+                                    <i class="fas fa-cog"></i> Manage Footer
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Contact Submissions Card -->
         <div class="row">
             <div class="col-lg-6">
@@ -237,22 +296,28 @@
                             </div>
                         </div>
                         <div class="row mt-3">
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="text-center">
                                     <h3 class="text-danger">{{ \App\Models\Contact::count() }}</h3>
                                     <p class="text-muted">Contact Submissions</p>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="text-center">
                                     <h3 class="text-dark">{{ \App\Models\TeamMember::where('is_active', true)->count() }}</h3>
                                     <p class="text-muted">Active Team Members</p>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 <div class="text-center">
                                     <h3 class="text-primary">{{ \App\Models\CompanyDirector::where('is_active', true)->count() }}</h3>
                                     <p class="text-muted">Active Directors</p>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="text-center">
+                                    <h3 class="text-warning">{{ \App\Models\Testimonial::where('is_active', true)->count() }}</h3>
+                                    <p class="text-muted">Active Testimonials</p>
                                 </div>
                             </div>
                         </div>

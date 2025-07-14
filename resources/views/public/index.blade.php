@@ -620,7 +620,7 @@
                     </p>
                     <p class="text-black-50">
                         Every property we recommend meets rigorous standards for legal compliance, offer integrity, and
-                        developer reliability. In fact, we endorse only the properties where we’d confidently invest our own
+                        developer reliability. In fact, we endorse only the properties where we'd confidently invest our own
                         money.
                     </p>
                     <p class="text-black-50">
@@ -1470,6 +1470,31 @@
             </div>
             <div class="testimonial-slider-wrap">
                 <div class="testimonial-slider">
+                    @forelse($testimonials as $testimonial)
+                    <div class="item">
+                        <div class="testimonial">
+                            @if($testimonial->image)
+                                <img src="{{ asset('storage/' . $testimonial->image) }}" alt="{{ $testimonial->name }}"
+                                    class="img-fluid rounded-circle w-25 mb-4" />
+                            @else
+                                <img src="{{ asset('scss/images/person_1-min.jpg') }}" alt="{{ $testimonial->name }}"
+                                    class="img-fluid rounded-circle w-25 mb-4" />
+                            @endif
+                            <div class="rate">
+                                @for($i = 1; $i <= 5; $i++)
+                                    <span class="icon-star {{ $i <= $testimonial->rating ? 'text-warning' : 'text-muted' }}"></span>
+                                @endfor
+                            </div>
+                            <h3 class="h5 text-primary mb-4">{{ $testimonial->name }}</h3>
+                            <blockquote>
+                                <p>
+                                    &ldquo;{{ $testimonial->testimonial }}&rdquo;
+                                </p>
+                            </blockquote>
+                            <p class="text-black-50">{{ $testimonial->position }}</p>
+                        </div>
+                    </div>
+                    @empty
                     <div class="item">
                         <div class="testimonial">
                             <img src="{{ asset('scss/images/person_1-min.jpg') }}" alt="Image"
@@ -1490,69 +1515,7 @@
                             <p class="text-black-50">Designer, Co-founder</p>
                         </div>
                     </div>
-
-                    <div class="item">
-                        <div class="testimonial">
-                            <img src="{{ asset('scss/images/person_2-min.jpg') }}" alt="Image"
-                                class="img-fluid rounded-circle w-25 mb-4" />
-                            <div class="rate">
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                            </div>
-                            <h3 class="h5 text-primary mb-4">Mike Houston</h3>
-                            <blockquote>
-                                <p>
-                                    &ldquo;Coming Soon..!&rdquo;
-                                </p>
-                            </blockquote>
-                            <p class="text-black-50">Designer, Co-founder</p>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="testimonial">
-                            <img src="{{ asset('scss/images/person_3-min.jpg') }}" alt="Image"
-                                class="img-fluid rounded-circle w-25 mb-4" />
-                            <div class="rate">
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                            </div>
-                            <h3 class="h5 text-primary mb-4">Cameron Webster</h3>
-                            <blockquote>
-                                <p>
-                                    &ldquo;Coming Soon..!&rdquo;
-                                </p>
-                            </blockquote>
-                            <p class="text-black-50">Designer, Co-founder</p>
-                        </div>
-                    </div>
-
-                    <div class="item">
-                        <div class="testimonial">
-                            <img src="{{ asset('scss/images/person_4-min.jpg') }}" alt="Image"
-                                class="img-fluid rounded-circle w-25 mb-4" />
-                            <div class="rate">
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                                <span class="icon-star text-warning"></span>
-                            </div>
-                            <h3 class="h5 text-primary mb-4">Dave Smith</h3>
-                            <blockquote>
-                                <p>
-                                    &ldquo;Coming Soon..!&rdquo;
-                                </p>
-                            </blockquote>
-                            <p class="text-black-50">Designer, Co-founder</p>
-                        </div>
-                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>
@@ -1659,90 +1622,48 @@
                 </div>
             </div>
             <div class="row">
+                @forelse($teamMembers as $member)
                 <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
                     <div class="h-100 person">
-                        <img src="{{ asset('scss/images/person_1-min.jpg') }}" alt="Image" class="img-fluid" />
+                        <img src="{{ asset('storage/' . $member->image) }}" alt="{{ $member->name }}" class="img-fluid" />
 
                         <div class="person-contents">
-                            <h2 class="mb-0"><a href="#">James Doe</a></h2>
-                            <span class="meta d-block mb-3">Real Estate Agent</span>
+                            <h2 class="mb-0"><a href="#">{{ $member->name }}</a></h2>
+                            <span class="meta d-block mb-3">{{ $member->position }}</span>
                             <p>
-                                &ldquo;Coming Soon..!&rdquo;
+                                {{ $member->description }}
                             </p>
 
                             <ul class="social list-unstyled list-inline dark-hover">
+                                @if($member->twitter_url)
                                 <li class="list-inline-item">
-                                    <a href="#"><span class="icon-twitter"></span></a>
+                                    <a href="{{ $member->twitter_url }}" target="_blank"><span class="icon-twitter"></span></a>
                                 </li>
+                                @endif
+                                @if($member->facebook_url)
                                 <li class="list-inline-item">
-                                    <a href="#"><span class="icon-facebook"></span></a>
+                                    <a href="{{ $member->facebook_url }}" target="_blank"><span class="icon-facebook"></span></a>
                                 </li>
+                                @endif
+                                @if($member->linkedin_url)
                                 <li class="list-inline-item">
-                                    <a href="#"><span class="icon-linkedin"></span></a>
+                                    <a href="{{ $member->linkedin_url }}" target="_blank"><span class="icon-linkedin"></span></a>
                                 </li>
+                                @endif
+                                @if($member->instagram_url)
                                 <li class="list-inline-item">
-                                    <a href="#"><span class="icon-instagram"></span></a>
+                                    <a href="{{ $member->instagram_url }}" target="_blank"><span class="icon-instagram"></span></a>
                                 </li>
+                                @endif
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                    <div class="h-100 person">
-                        <img src="{{ asset('scss/images/person_2-min.jpg') }}" alt="Image" class="img-fluid" />
-
-                        <div class="person-contents">
-                            <h2 class="mb-0"><a href="#">Jean Smith</a></h2>
-                            <span class="meta d-block mb-3">Real Estate Agent</span>
-                            <p>
-                                &ldquo;Coming Soon..!&rdquo;
-                            </p>
-
-                            <ul class="social list-unstyled list-inline dark-hover">
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-twitter"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-facebook"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-linkedin"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-instagram"></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+                @empty
+                <div class="col-12 text-center">
+                    <p>No team members available at the moment.</p>
                 </div>
-                <div class="col-sm-6 col-md-6 col-lg-4 mb-5 mb-lg-0">
-                    <div class="h-100 person">
-                        <img src="{{ asset('scss/images/person_3-min.jpg') }}" alt="Image" class="img-fluid" />
-
-                        <div class="person-contents">
-                            <h2 class="mb-0"><a href="#">Alicia Huston</a></h2>
-                            <span class="meta d-block mb-3">Real Estate Agent</span>
-                            <p>
-                                &ldquo;Coming Soon..!&rdquo;
-                            </p>
-
-                            <ul class="social list-unstyled list-inline dark-hover">
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-twitter"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-facebook"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-linkedin"></span></a>
-                                </li>
-                                <li class="list-inline-item">
-                                    <a href="#"><span class="icon-instagram"></span></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+                @endforelse
             </div>
         </div>
     </div>

@@ -60,6 +60,14 @@
                     <li class="nav-item"><a class="nav-link" href="{{url('/register-list-view')}}"><i class="ti-control-record"></i>List</a></li>
                 </ul>
             </li>
+            <li>
+                <a href="javascript: void(0);"><i data-feather="grid" class="align-self-center menu-icon"></i><span>Content</span><span class="menu-arrow"><i class="mdi mdi-chevron-right"></i></span></a>
+                <ul class="nav-second-level" aria-expanded="false">
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.team-member.index') }}"><i class="ti-control-record"></i>Team Members</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.company-director.index') }}"><i class="ti-control-record"></i>Company Directors</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('admin.footer.index') }}"><i class="ti-control-record"></i>Footer Settings</a></li>
+                </ul>
+            </li>
 
             <hr class="hr-dashed hr-menu">          
         </ul>

@@ -7,15 +7,17 @@
         </div>
     </div>
 </footer>
+
+<!-- Dynamic Footer -->
+@include('public.layouts.dynamic-footer')
+
 <script src="{{ asset('scss/js/bootstrap.bundle.min.js') }}"></script>
 <script src="{{ asset('scss/js/tiny-slider.js') }}"></script>
 <script src="{{ asset('scss/js/aos.js') }}"></script>
 <script src="{{ asset('scss/js/navbar.js') }}"></script>
 <script src="{{ asset('scss/js/counter.js') }}"></script>
 <script src="{{ asset('scss/js/custom.js') }}"></script>
-<script src="{{ asset('scss/js/neededfooter.js') }}"></script>
 <script src="{{ asset('scss/js/neededloader.js') }}"></script>
-
 
 <!-- Modal -->
 

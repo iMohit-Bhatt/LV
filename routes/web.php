@@ -11,13 +11,12 @@ use App\Http\Controllers\Admin\PropertyController as AdminPropertyController;
 use App\Http\Controllers\Public\PropertyController as PublicPropertyController;
 use App\Http\Controllers\Admin\TeamMemberController as AdminTeamMemberController;
 use App\Http\Controllers\Public\TeamController as PublicTeamController;
+use App\Http\Controllers\Public\HomeController as PublicHomeController;
 use App\Http\Controllers\Admin\CompanyDirectorController as AdminCompanyDirectorController;
 use App\Http\Controllers\Public\CompanyDirectorController as PublicCompanyDirectorController;
 use App\Http\Controllers\ContactController;
 
-Route::get('/', function () {
-    return view('public.index');
-})->name('public.index');
+Route::get('/', [PublicHomeController::class, 'index'])->name('public.index');
 
 Route::get('/about', function () {
     return view('public.about');
@@ -98,6 +97,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
     // Company Director
     Route::resource('company-director', AdminCompanyDirectorController::class);
+
+    // Testimonial
+    Route::resource('testimonial', \App\Http\Controllers\Admin\TestimonialController::class);
+
+    // Footer
+    Route::resource('footer', \App\Http\Controllers\Admin\FooterController::class);
 
     // Contact Submissions
     Route::get('contact-submissions', [\App\Http\Controllers\Admin\ContactSubmissionController::class, 'index'])->name('contact-submissions.index');
