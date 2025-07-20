@@ -109,6 +109,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
     Route::get('about-us', [AboutUsController::class, 'index'])->name('about-us.index');
     Route::post('about-us', [AboutUsController::class, 'store'])->name('about-us.store');
 
+    // Main Page Management
+    Route::get('main-page', [\App\Http\Controllers\Admin\MainPageController::class, 'index'])->name('main-page.index');
+    Route::put('main-page', [\App\Http\Controllers\Admin\MainPageController::class, 'update'])->name('main-page.update');
+
     // Contact Submissions
     Route::get('contact-submissions', [\App\Http\Controllers\Admin\ContactSubmissionController::class, 'index'])->name('contact-submissions.index');
 });

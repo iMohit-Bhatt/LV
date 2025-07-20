@@ -35,6 +35,9 @@
                         <a class="nav-link" href="/admin/about-us">About Us</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="/admin/main-page">Main Page</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="/">Public Site</a>
                     </li>
                 </ul>
