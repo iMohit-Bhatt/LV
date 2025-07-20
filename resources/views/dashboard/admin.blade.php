@@ -200,6 +200,34 @@
                     </div>
                 </div>
             </div>
+
+            <div class="col-lg-3 col-xl-3">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="media">
+                                    <div class="media-body">
+                                        <p class="text-muted mb-1">About Us Content</p>
+                                        <h4 class="mb-0">Manage About Us</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-4 align-self-center text-end">
+                                <i class="fas fa-info-circle fa-2x text-primary"></i>
+                            </div>
+                        </div>
+                        <hr class="hr-dashed">
+                        <div class="row">
+                            <div class="col">
+                                <a href="{{ route('admin.about-us.index') }}" class="btn btn-primary btn-sm w-100">
+                                    <i class="fas fa-cog"></i> Manage About Us
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <!-- Contact Submissions Card -->

@@ -29,40 +29,40 @@
                         <div class="col-12">
                             <h2 class="font-weight-bold heading text-primary mb-4">Plots & Villa</h2>
                         </div>
-                    </div>
+                </div>
                 </div>
             </div>
 
             <div class="row">
                 @forelse($properties as $property)
                 <div class="col-md-6 col-lg-4 mb-4">
-                    <div class="property-item">
-                        <a href="properties.html" class="img">
+                            <div class="property-item">
+                                        <a href="properties.html" class="img">
                             <img src="{{ asset('storage/' . $property->image) }}" alt="{{ $property->name }}" class="img-fluid" />
-                        </a>
-                        <div class="property-content">
+                                        </a>
+                                        <div class="property-content">
                             <div class="price mb-2"><span class="d-block">{{ $property->name }}</span></div>
                             <span class="d-block mb-2 text-black-50">{{ ucfirst($property->type) }}</span>
                             <span class="d-block mb-2 text-black-50">{{ $property->location }}{{ $property->pincode ? ', ' . $property->pincode : '' }}</span>
-                            <div class="specs mb-4">
-                                <span class="d-block d-flex align-items-center me-3">
+                                            <div class="specs mb-4">
+                                                <span class="d-block d-flex align-items-center me-3">
                                     <b>Price Start&nbsp;<span>@ {{ $property->price_range }}</span>&nbsp;*Onwards</b>
-                                    <span class="caption"></span>
-                                </span>
+                                                    <span class="caption"></span>
+                                                </span>
 
-                                <div class="d-flex">
-                                    <span class="d-block d-flex align-items-center me-3">
-                                        <span class="icon-home me-2"></span>
+                                                <div class="d-flex">
+                                                    <span class="d-block d-flex align-items-center me-3">
+                                                        <span class="icon-home me-2"></span>
                                         <span class="caption">{{ $property->bhk_range }}</span>
-                                    </span>
-                                </div>
-                                <span class="d-block d-flex align-items-center me-3">
-                                    <span class="icon-car me-2"></span>
+                                                    </span>
+                                                </div>
+                                                <span class="d-block d-flex align-items-center me-3">
+                                                    <span class="icon-car me-2"></span>
                                     <span class="caption">{{ $property->area_range }}</span>
-                                </span>
+                                                </span>
                             </div>
                             @if($property->modal_target)
-                            <a class="btn btn-primary py-2 px-3" data-bs-toggle="modal"
+                                            <a class="btn btn-primary py-2 px-3" data-bs-toggle="modal"
                                 data-bs-target="#{{ $property->modal_target }}">See details</a>
                             @else
                             <a class="btn btn-primary py-2 px-3" href="#">See details</a>

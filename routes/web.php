@@ -15,6 +15,7 @@ use App\Http\Controllers\Public\HomeController as PublicHomeController;
 use App\Http\Controllers\Admin\CompanyDirectorController as AdminCompanyDirectorController;
 use App\Http\Controllers\Public\CompanyDirectorController as PublicCompanyDirectorController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\AboutUsController;
 
 Route::get('/', [PublicHomeController::class, 'index'])->name('public.index');
 
@@ -103,6 +104,10 @@ Route::prefix('admin')->name('admin.')->middleware(['auth'])->group(function () 
 
     // Footer
     Route::resource('footer', \App\Http\Controllers\Admin\FooterController::class);
+
+    // About Us
+    Route::get('about-us', [AboutUsController::class, 'index'])->name('about-us.index');
+    Route::post('about-us', [AboutUsController::class, 'store'])->name('about-us.store');
 
     // Contact Submissions
     Route::get('contact-submissions', [\App\Http\Controllers\Admin\ContactSubmissionController::class, 'index'])->name('contact-submissions.index');
