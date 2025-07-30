@@ -102,8 +102,18 @@ if ! grep -q "^APP_KEY=base64:" .env; then
     docker-compose exec app php artisan key:generate
 fi
 
-echo -e "${GREEN}Laravel application is now running at http://localhost:8000${NC}"
+# Run database seeding
+echo -e "${YELLOW}Seeding database with default data...${NC}"
+docker-compose exec app php artisan db:seed
+
+# Clear caches
+echo -e "${YELLOW}Clearing application caches...${NC}"
+docker-compose exec app php artisan cache:clear
+docker-compose exec app php artisan config:clear
+docker-compose exec app php artisan view:clear
+
+echo -e "${GREEN}Laravel application is now running at http://localhost:8080${NC}"
 echo -e "${GREEN}You can access:${NC}"
-echo -e "${GREEN}- Login: http://localhost:8000/login${NC}"
-echo -e "${GREEN}- Register: http://localhost:8000/register${NC}"
-echo -e "${GREEN}- Dashboard: http://localhost:8000/dashboard${NC}" 
+echo -e "${GREEN}- Login: http://localhost:8080/login${NC}"
+echo -e "${GREEN}- Register: http://localhost:8080/register${NC}"
+echo -e "${GREEN}- Dashboard: http://localhost:8080/dashboard${NC}" 

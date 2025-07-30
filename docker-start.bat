@@ -112,6 +112,10 @@ docker-compose exec app npm run build
 echo %YELLOW%Running database migrations...%NC%
 docker-compose exec app php artisan migrate
 
+:: Run database seeding
+echo %YELLOW%Seeding database with default data...%NC%
+docker-compose exec app php artisan db:seed
+
 :: Generate application key if not set
 findstr /C:"APP_KEY=base64:" .env >nul
 if %ERRORLEVEL% neq 0 (
@@ -126,10 +130,10 @@ docker-compose exec app php artisan cache:clear
 docker-compose exec app php artisan view:clear
 docker-compose exec app php artisan route:clear
 
-echo %GREEN%Laravel application is now running at http://localhost:8000%NC%
+echo %GREEN%Laravel application is now running at http://localhost:8080%NC%
 echo %GREEN%You can access:%NC%
-echo %GREEN%- Login: http://localhost:8000/login%NC%
-echo %GREEN%- Register: http://localhost:8000/register%NC%
-echo %GREEN%- Dashboard: http://localhost:8000/dashboard%NC%
+echo %GREEN%- Login: http://localhost:8080/login%NC%
+echo %GREEN%- Register: http://localhost:8080/register%NC%
+echo %GREEN%- Dashboard: http://localhost:8080/dashboard%NC%
 
 endlocal 
