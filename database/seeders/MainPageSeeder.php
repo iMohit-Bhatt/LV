@@ -15,7 +15,7 @@ class MainPageSeeder extends Seeder
     {
         MainPage::create([
             'hero_title' => 'Easiest way to find your dream home',
-            'hero_subtitle' => 'Discover your perfect property with EkanshRealty',
+            'hero_subtitle' => 'Discover your perfect property with EkanshRealtyy',
             'hero_search_placeholder' => 'Search Here for properties',
             'about_title' => 'About Us',
             'about_content' => 'At EkanshRealty, our mission is to guide customers toward making the RIGHT property investments with complete transparency and zero hassle. We collaborate exclusively with a select group of top-tier real estate developers known for their exceptional quality and timely project delivery.',

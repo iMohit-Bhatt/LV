@@ -800,7 +800,7 @@
                         <div class="tab-pane text-center" id="callUs" role="tabpanel"
                             aria-labelledby="callUs-tab">
                             <h2 class="font-weight-bold text-primary heading mb-5">Send Query Now</h2>
-                            <form method="POST" id="contactForm" name="contactForm" action="sendEmail.php"
+                            <form method="POST" id="contactForm" name="contactForm" action="/scss/php/sendEmail.php"
                                 class="mb-5">
                                 <div class="row">
                                     <div class="col-6 mb-3">
@@ -1017,3 +1017,196 @@
         </div>
     </div>
 @endsection
+
+<style>
+/* Contact Popup Modal Styles */
+#contactPopupModal .modal-content {
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+}
+
+#contactPopupModal .modal-header {
+    background: white;
+    color: #333;
+    border-bottom: 1px solid #e9ecef;
+    border-radius: 8px 8px 0 0;
+    padding: 1rem 1.5rem;
+}
+
+#contactPopupModal .modal-title {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #333;
+}
+
+#contactPopupModal .btn-close {
+    opacity: 0.7;
+}
+
+#contactPopupModal .modal-body {
+    padding: 1.5rem;
+    background: white;
+}
+
+#contactPopupModal .form-control {
+    border-radius: 4px;
+    border: 1px solid #ced4da;
+    padding: 10px 12px;
+    font-size: 14px;
+    transition: border-color 0.15s ease-in-out;
+}
+
+#contactPopupModal .form-control:focus {
+    border-color: #80bdff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+#contactPopupModal .btn-dark {
+    background-color: #000;
+    border-color: #000;
+    border-radius: 4px;
+    padding: 12px 24px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+#contactPopupModal .btn-dark:hover {
+    background-color: #333;
+    border-color: #333;
+    transform: translateY(-1px);
+}
+
+/* Animation for modal appearance */
+#contactPopupModal.fade .modal-dialog {
+    transform: scale(0.9);
+    transition: transform 0.3s ease-out;
+}
+
+#contactPopupModal.show .modal-dialog {
+    transform: scale(1);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #contactPopupModal .modal-body {
+        padding: 1rem;
+    }
+}
+</style>
+
+<!-- Contact Form Popup Modal -->
+<div class="modal fade" id="contactPopupModal" tabindex="-1" aria-labelledby="contactPopupModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="contactPopupModalLabel">
+                    Book Now
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="POST" id="popupContactForm" name="popupContactForm" action="/scss/php/sendEmail.php" class="mb-3">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="name" id="popup_name" placeholder="Name" required />
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="whatsapp" id="popup_whatsapp" placeholder="WhatsApp Number" required />
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" name="email" id="popup_email" placeholder="Email" required />
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="query" id="popup_query" placeholder="Query" required />
+                            </div>
+                            <div class="mb-3">
+                                <textarea name="message" class="form-control" id="popup_message" cols="30" rows="5" placeholder="Message" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="mb-3">
+                                <input type="tel" class="form-control" name="phone" id="popup_phone" placeholder="+91 XXXX XXXX XX" required />
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" class="form-control" name="job_title" id="popup_job_title" placeholder="Job Title" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <button type="submit" name="send" class="btn btn-dark btn-lg w-100">
+                                Send Message
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Show popup after 3 seconds
+    setTimeout(function() {
+        // Check if popup was already shown in this session
+        if (!sessionStorage.getItem('contactPopupShown')) {
+            var contactModal = new bootstrap.Modal(document.getElementById('contactPopupModal'));
+            contactModal.show();
+            sessionStorage.setItem('contactPopupShown', 'true');
+        }
+    }, 3000);
+
+    // Handle form submission
+    document.getElementById('popupContactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        // Get form data
+        var formData = new FormData(this);
+        // Add the 'send' parameter that PHP expects
+        formData.append('send', 'Send Message');
+        
+        // Show loading state
+        var submitBtn = this.querySelector('button[type="submit"]');
+        var originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        submitBtn.disabled = true;
+        
+        // Submit form to send email to admin and user
+        fetch(this.action, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            console.log('Server response:', data);
+            if(data.includes('Message has been sent')) {
+                // Show success message
+                alert('Thank you! Your message has been sent successfully. We will contact you soon.');
+                
+                // Reset form
+                this.reset();
+                
+                // Close modal
+                var modal = bootstrap.Modal.getInstance(document.getElementById('contactPopupModal'));
+                modal.hide();
+            } else {
+                // Show error message with server response
+                alert('Error: ' + data);
+            }
+        })
+        .catch(error => {
+            // Show error message
+            alert('Sorry! There was an error sending your message. Please try again.');
+            console.error('Error:', error);
+        })
+        .finally(() => {
+            // Reset button
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+        });
+    });
+});
+</script>

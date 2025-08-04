@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test Contact Form</title>
+</head>
+<body>
+    <h2>Test Contact Form</h2>
+    <form method="POST" action="/scss/php/sendEmail.php">
+        <p>
+            <label>Name:</label><br>
+            <input type="text" name="name" value="Test User" required>
+        </p>
+        <p>
+            <label>Email:</label><br>
+            <input type="email" name="email" value="test@example.com" required>
+        </p>
+        <p>
+            <label>WhatsApp:</label><br>
+            <input type="text" name="whatsapp" value="1234567890">
+        </p>
+        <p>
+            <label>Phone:</label><br>
+            <input type="tel" name="phone" value="9876543210">
+        </p>
+        <p>
+            <label>Query:</label><br>
+            <input type="text" name="query" value="Test Query">
+        </p>
+        <p>
+            <label>Job Title:</label><br>
+            <input type="text" name="job_title" value="Developer">
+        </p>
+        <p>
+            <label>Message:</label><br>
+            <textarea name="message" required>This is a test message from the contact form.</textarea>
+        </p>
+        <p>
+            <input type="submit" name="send" value="Send Message">
+        </p>
+    </form>
+</body>
+</html>
